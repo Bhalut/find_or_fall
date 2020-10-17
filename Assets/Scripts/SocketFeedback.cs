@@ -9,6 +9,7 @@ public class SocketFeedback : MonoBehaviour
 	public string socketID;
 	public string player1ID;
 	public string player2ID;
+	public GameObject buttonSendTurn;
 
 	public void SetSocketID(string id)
 	{
