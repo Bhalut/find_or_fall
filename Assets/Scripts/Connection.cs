@@ -14,6 +14,7 @@ public class Connection : MonoBehaviour
 		socket.On("opponent disconnected", OnOpponentDisconnected);
 		socket.On("start game", OnStartGame);
 		socket.On("my turn", OnMyTurn);
+		socket.On("opponent username", OnOpponentUsername);
 	}
 
 	public void OnOpen(SocketIOEvent e)
@@ -48,13 +49,19 @@ public class Connection : MonoBehaviour
         {
 			SocketFeedbackInstance.buttonSendTurn.SetActive(true);
 		}
+		EmitUsername();
 	}
 
 	public void OnMyTurn(SocketIOEvent e)
     {
-		Debug.Log("My Turn");
+		Debug.Log("My Turn, the opponent send: " + e.data.GetField("button"));
 		//Allow to click the buttons
     }
+
+	public void OnOpponentUsername(SocketIOEvent e)
+	{
+		Debug.Log("Opponent username: " + e.data.GetField("username"));
+	}
 
 
 	// =======================================================================
@@ -64,4 +71,10 @@ public class Connection : MonoBehaviour
 		Debug.Log("Emit turn by player");
 		//Wait for response
 	}
+
+	public void EmitUsername()
+    {
+		var username = "name" + Random.Range(100, 999);
+		socket.Emit("emit username", JSONObject.CreateStringObject(username));
+    }
 }
