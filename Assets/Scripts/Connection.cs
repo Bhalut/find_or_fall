@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using SocketIO;
+using UnityEngine.SceneManagement;
 
 public class Connection : MonoBehaviour
 {
 	public SocketIOComponent socket;
 	public SocketFeedback SocketFeedbackInstance;
 
-	private void Start()
+    private void Awake()
+    {
+		DontDestroyOnLoad(gameObject);
+    }
+    private void Start()
 	{
 		socket.On("open", OnOpen);
 		socket.On("error", OnError);
@@ -45,6 +50,7 @@ public class Connection : MonoBehaviour
 	{
 		Debug.Log("[SocketIO] Match complete: " + e.name + " " + e.data);
 		SocketFeedbackInstance.SetPlayersID(e.data.GetField("player1_id").str, e.data.GetField("player2_id").str);
+		SceneManager.LoadScene("Main");
 		if (socket.sid == e.data.GetField("player1_id").str)
         {
 			SocketFeedbackInstance.buttonSendTurn.SetActive(true);
@@ -65,12 +71,12 @@ public class Connection : MonoBehaviour
 
 
 	// =======================================================================
-	public void EmitTurn(string value)
-	{
-		socket.Emit("emit turn", JSONObject.CreateStringObject(value));
-		Debug.Log("Emit turn by player");
-		//Wait for response
-	}
+	//public void EmitTurn(string value)
+	//{
+	//	socket.Emit("emit turn", JSONObject.CreateStringObject(value));
+	//	Debug.Log("Emit turn by player");
+	//	//Wait for response
+	//}
 
 	public void EmitUsername()
     {
