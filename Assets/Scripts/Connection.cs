@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using SocketIO;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Connection : MonoBehaviour
 {
 	public SocketIOComponent socket;
 	public SocketFeedback SocketFeedbackInstance;
+	public static int button1;
+	public static int button2;
 
-    private void Awake()
+	private void Awake()
     {
 		DontDestroyOnLoad(gameObject);
     }
@@ -49,13 +52,22 @@ public class Connection : MonoBehaviour
 	public void OnStartGame(SocketIOEvent e)
 	{
 		Debug.Log("[SocketIO] Match complete: " + e.name + " " + e.data);
+
 		SocketFeedbackInstance.SetPlayersID(e.data.GetField("player1_id").str, e.data.GetField("player2_id").str);
-		SceneManager.LoadScene("Main");
 		if (socket.sid == e.data.GetField("player1_id").str)
-        {
 			SocketFeedbackInstance.buttonSendTurn.SetActive(true);
-		}
+
+		button1 = int.Parse(e.data.GetField("button_1").str);
+		button2 = int.Parse(e.data.GetField("button_2").str);
+
+		StartCoroutine(LoadingGame());
 		EmitUsername();
+	}
+
+	IEnumerator LoadingGame() {
+		Debug.Log("entraaaaaaaaa");
+		yield return new WaitForSeconds(2f);
+		SceneManager.LoadScene(1);
 	}
 
 	public void OnMyTurn(SocketIOEvent e)
@@ -71,13 +83,6 @@ public class Connection : MonoBehaviour
 
 
 	// =======================================================================
-	//public void EmitTurn(string value)
-	//{
-	//	socket.Emit("emit turn", JSONObject.CreateStringObject(value));
-	//	Debug.Log("Emit turn by player");
-	//	//Wait for response
-	//}
-
 	public void EmitUsername()
     {
 		var username = "name" + Random.Range(100, 999);
