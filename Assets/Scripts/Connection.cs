@@ -8,10 +8,10 @@ public class Connection : MonoBehaviour
     public static int Button1;
     
     public static int Button2;
-    
+
     public SocketIOComponent socket;
 
-    private RandomButtons buttons;
+    public static RandomButtons buttons;
 
     private void Awake()
     {
@@ -20,7 +20,6 @@ public class Connection : MonoBehaviour
 
     private void Start()
     {
-        buttons = FindObjectOfType<RandomButtons>();
         socket.On("open", OnOpen);
         socket.On("error", OnError);
         socket.On("close", OnClose);
@@ -84,7 +83,7 @@ public class Connection : MonoBehaviour
         Button2 = int.Parse(e.data.GetField("button_2").str);
 
         SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
-        
+
         EmitUsername();
     }
 
@@ -94,6 +93,7 @@ public class Connection : MonoBehaviour
         Debug.Log("My Turn, the opponent send: " + e.data.GetField("button"));
 #endif
         buttons.DisableButton(int.Parse(e.data.GetField("button").str));
+
         //Allow to click the buttons
     }
 

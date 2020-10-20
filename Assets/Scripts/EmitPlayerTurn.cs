@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using SocketIO;
 
 public class EmitPlayerTurn : MonoBehaviour
 {
-    private Connection connection;
+    [SerializeField] private Connection connection;
 
     private void Start()
     {
