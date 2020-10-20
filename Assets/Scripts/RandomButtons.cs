@@ -1,40 +1,40 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+#pragma warning disable 618
+#pragma warning disable 649
+
 public class RandomButtons : MonoBehaviour
 {
-    [SerializeField] GameObject[] buttons = new GameObject[8];
-    [SerializeField] GameObject gate1;
-    [SerializeField] GameObject gate2;
+    [SerializeField] private GameObject[] buttons = new GameObject[8];
+    
+    [SerializeField] private GameObject gateOne;
+    
+    [SerializeField] private GameObject gateTwo;
 
 	private void Start()
 	{
         AssignButtonAction();
 	}
 
-	public void AssignButtonAction()
+    private void AssignButtonAction()
     {
         for (int i = 0; i < buttons.Length; i++)
         {
-            if (i == Connection.button1)
+            if (i == Connection.Button1)
             {
-                buttons[i].GetComponent<Button>().onClick.AddListener(OpenGate1);
+                buttons[i].GetComponent<Button>().onClick.AddListener(() => OpenGate(gateOne.GetComponent<Collider2D>()));
             }
 
-            if (i == Connection.button2)
+            if (i == Connection.Button2)
             {
-                buttons[i].GetComponent<Button>().onClick.AddListener(OpenGate2);
+                buttons[i].GetComponent<Button>().onClick.AddListener(() => OpenGate(gateTwo.GetComponent<Collider2D>()));
             }
         }
     }
 
-    void OpenGate1()
+    private static void OpenGate(Behaviour collider2D)
     {
-        gate1.GetComponent<Collider2D>().enabled = false;
-    }
-
-    void OpenGate2()
-    {
-        gate2.GetComponent<Collider2D>().enabled = false;
+        collider2D.enabled = false;
     }
 }
