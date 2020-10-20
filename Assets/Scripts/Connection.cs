@@ -66,7 +66,7 @@ public class Connection : MonoBehaviour
 
         button2 = int.Parse(e.data.GetField("button_2").str);
 
-        SceneManager.LoadSceneAsync("Scenes/Main", LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
         
         EmitUsername();
     }
