@@ -1,22 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Background : MonoBehaviour
 {
 	public float scrollSpeed;
+	
 	public float tileSizeZ;
 
-	private Vector3 startPosition;
+	private Vector3 _startPosition;
 
-	void Start()
+	private void Start()
 	{
-		startPosition = transform.position;
+		_startPosition = transform.position;
 	}
 
-	void Update()
+	private void Update()
 	{
-		float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
-		transform.position = startPosition + Vector3.left * newPosition;
+		var newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
+		
+		transform.position = _startPosition + Vector3.left * newPosition;
 	}
 }
