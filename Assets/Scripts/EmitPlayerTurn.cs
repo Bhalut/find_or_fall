@@ -2,7 +2,7 @@
 
 public class EmitPlayerTurn : MonoBehaviour
 {
-    [SerializeField] private Connection connection;
+    private Connection connection;
 
     private void Start()
     {

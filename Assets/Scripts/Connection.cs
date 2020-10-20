@@ -11,6 +11,8 @@ public class Connection : MonoBehaviour
     
     public SocketIOComponent socket;
 
+    private RandomButtons buttons;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -18,6 +20,7 @@ public class Connection : MonoBehaviour
 
     private void Start()
     {
+        buttons = FindObjectOfType<RandomButtons>();
         socket.On("open", OnOpen);
         socket.On("error", OnError);
         socket.On("close", OnClose);
@@ -90,7 +93,7 @@ public class Connection : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("My Turn, the opponent send: " + e.data.GetField("button"));
 #endif
-        
+        buttons.DisableButton(int.Parse(e.data.GetField("button").str));
         //Allow to click the buttons
     }
 

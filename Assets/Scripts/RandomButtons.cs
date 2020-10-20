@@ -19,7 +19,7 @@ public class RandomButtons : MonoBehaviour
 
     private void AssignButtonAction()
     {
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < buttons.Length - 1; i++)
         {
             if (i == Connection.Button1)
             {
@@ -36,5 +36,10 @@ public class RandomButtons : MonoBehaviour
     private static void OpenGate(Behaviour collider2D)
     {
         collider2D.enabled = false;
+    }
+
+    public void DisableButton(int button)
+    {
+        buttons[button].GetComponent<Button>().interactable = false;
     }
 }
