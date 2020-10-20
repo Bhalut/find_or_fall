@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EmitPlayerTurn : MonoBehaviour
 {
-    [SerializeField] Connection connection;
+    [SerializeField] private Connection connection;
 
     private void Start()
     {
@@ -14,7 +12,10 @@ public class EmitPlayerTurn : MonoBehaviour
     public void EmitTurn(string value)
 	{
 		connection.socket.Emit("emit turn", JSONObject.CreateStringObject(value));
+#if UNITY_EDITOR
 		Debug.Log("Emit turn by player");
+#endif
+		
 		//Wait for response
 	}
 }
