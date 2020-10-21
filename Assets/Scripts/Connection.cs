@@ -9,6 +9,8 @@ public class Connection : MonoBehaviour
     
     public static int Button2;
 
+    public string player1_id;
+
     public SocketIOComponent socket;
 
     public static RandomButtons buttons;
@@ -87,16 +89,11 @@ public class Connection : MonoBehaviour
 
         Button2 = int.Parse(e.data.GetField("button_2").str);
 
+        player1_id = e.data.GetField("player1_id").str;
+
         SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
 
         EmitUsername();
-
-        if (socket.sid == e.data.GetField("player1_id").str)
-        {
-            Debug.Log("Si entra");
-            turnManager.ShowMyTurnText();
-        }
-        else turnManager.ShowNotMyTurnText();
     }
 
     public void OnMyTurn(SocketIOEvent e)

@@ -1,14 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] private GameObject image;
     [SerializeField] private GameObject yourTurnText;
     [SerializeField] private GameObject notYourTurnText;
+
+    private Connection connection;
+    
     void Start()
     {
+        connection = FindObjectOfType<Connection>();
+
+        if(connection.socket.sid == connection.player1_id)
+        {
+            ShowMyTurnText();
+        }
+        else ShowNotMyTurnText();
+        
         Connection.turnManager = this;
     }
     public void ShowMyTurnText()
@@ -16,7 +25,6 @@ public class TurnManager : MonoBehaviour
         notYourTurnText.SetActive(false);
         yourTurnText.SetActive(true);
         image.SetActive(false);
-        Debug.Log("Mi turno!");
     }
 
     public void ShowNotMyTurnText()
