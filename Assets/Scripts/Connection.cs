@@ -104,8 +104,8 @@ public class Connection : MonoBehaviour
         var button = int.Parse(e.data.GetField("button").str);
         buttons.DisableButton(button);
         buttons.ButtonPressed(button);
+        buttons.CheckConditionToWin(button);
         turnManager.ShowMyTurnText();
-        //Allow to click the buttons
     }
 
     public void OnOpponentUsername(SocketIOEvent e)
