@@ -5,7 +5,7 @@ public class EmitPlayerTurn : MonoBehaviour
 {
     private Connection connection;
     [SerializeField] TurnManager turnManager;
-    [SerializeField] RandomButtons randomButtons;
+    [SerializeField] ButtonManager randomButtons;
 
     private void Start()
     {

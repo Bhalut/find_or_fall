@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+#pragma warning disable 618
+#pragma warning disable 649
+
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] private GameObject image;

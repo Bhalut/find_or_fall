@@ -5,13 +5,15 @@ using UnityEngine.UI;
 #pragma warning disable 618
 #pragma warning disable 649
 
-public class RandomButtons : MonoBehaviour
+public class ButtonManager : MonoBehaviour
 {
     [SerializeField] private Button[] buttons;
  
     [SerializeField] private GameObject gateOne;
     
     [SerializeField] private GameObject gateTwo;
+
+    [SerializeField] private EndGame endGame;
 
     private Connection connection;
 
@@ -45,11 +47,13 @@ public class RandomButtons : MonoBehaviour
             if(connection.socket.sid == connection.player1_id)
             {
                 //lose
+                endGame.GetEndGame(false);
                 Debug.Log("lose");
             }
             else
             {
                 // win
+                endGame.GetEndGame(true);
                 Debug.Log("win");
             }
         }
@@ -58,11 +62,13 @@ public class RandomButtons : MonoBehaviour
             if(connection.socket.sid == connection.player1_id)
             {
                 //win
+                endGame.GetEndGame(true);
                 Debug.Log("win");
             }
             else
             {
                 // lose
+                endGame.GetEndGame(false);
                 Debug.Log("lose");
             }
         }

@@ -13,7 +13,7 @@ public class Connection : MonoBehaviour
 
     public SocketIOComponent socket;
 
-    public static RandomButtons buttons;
+    public static ButtonManager buttons;
 
     public static TurnManager turnManager;
 
