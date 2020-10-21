@@ -13,6 +13,8 @@ public class Connection : MonoBehaviour
 
     public static RandomButtons buttons;
 
+    public static TurnManager turnManager;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -85,6 +87,13 @@ public class Connection : MonoBehaviour
         SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
 
         EmitUsername();
+
+        if (socket.sid == e.data.GetField("player1_id").str)
+        {
+            Debug.Log("Si entra");
+            turnManager.ShowMyTurnText();
+        }
+        else turnManager.ShowNotMyTurnText();
     }
 
     public void OnMyTurn(SocketIOEvent e)
@@ -96,6 +105,7 @@ public class Connection : MonoBehaviour
         buttons.DisableButton(button);
         if (button == Button1) buttons.OpenGateFromConnection(1);
         else buttons.OpenGateFromConnection(2);
+        turnManager.ShowMyTurnText();
         //Allow to click the buttons
     }
 

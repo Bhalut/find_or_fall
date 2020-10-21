@@ -3,7 +3,8 @@ using SocketIO;
 
 public class EmitPlayerTurn : MonoBehaviour
 {
-    [SerializeField] private Connection connection;
+    private Connection connection;
+    [SerializeField] TurnManager turnManager;
 
     private void Start()
     {
@@ -13,6 +14,7 @@ public class EmitPlayerTurn : MonoBehaviour
     public void EmitTurn(string value)
 	{
 		connection.socket.Emit("emit turn", JSONObject.CreateStringObject(value));
+        turnManager.ShowNotMyTurnText();
 #if UNITY_EDITOR
 		Debug.Log("Emit turn by player");
 #endif
