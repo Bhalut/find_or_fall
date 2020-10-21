@@ -15,6 +15,8 @@ public class Connection : MonoBehaviour
 
     public static TurnManager turnManager;
 
+    public static OpponentDisconnected opponentDisconnected;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -70,7 +72,8 @@ public class Connection : MonoBehaviour
 #endif
         
         socket.Close();
-        
+
+        opponentDisconnected.ShowScreenOpponentDisconnected();
         //Notification on screen and stop the game
     }
 
