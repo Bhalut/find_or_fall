@@ -103,8 +103,7 @@ public class Connection : MonoBehaviour
 #endif
         var button = int.Parse(e.data.GetField("button").str);
         buttons.DisableButton(button);
-        if (button == Button1) buttons.OpenGateFromConnection(1);
-        else buttons.OpenGateFromConnection(2);
+        buttons.ButtonPressed(button);
         turnManager.ShowMyTurnText();
         //Allow to click the buttons
     }
