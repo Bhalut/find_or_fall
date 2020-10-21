@@ -41,12 +41,17 @@ public class RandomButtons : MonoBehaviour
                 buttons[i].onClick.AddListener(() => OpenGate(gateTwo.GetComponent<Collider2D>()));
             }
         }
-
     }
 
     private static void OpenGate(Behaviour collider2D)
     {
         collider2D.enabled = false;
+    }
+
+    public void OpenGateFromConnection(int gate)
+    {
+        if (gate == 1) gateOne.GetComponent<Collider2D>().enabled = false;
+        else gateTwo.GetComponent<Collider2D>().enabled = false;
     }
 
     //public void DisableButton(Button button)

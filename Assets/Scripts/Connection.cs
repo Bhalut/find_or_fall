@@ -92,8 +92,10 @@ public class Connection : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("My Turn, the opponent send: " + e.data.GetField("button"));
 #endif
-        buttons.DisableButton(int.Parse(e.data.GetField("button").str));
-
+        var button = int.Parse(e.data.GetField("button").str);
+        buttons.DisableButton(button);
+        if (button == Button1) buttons.OpenGateFromConnection(1);
+        else buttons.OpenGateFromConnection(2);
         //Allow to click the buttons
     }
 
