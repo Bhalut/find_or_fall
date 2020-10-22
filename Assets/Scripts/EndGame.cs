@@ -11,10 +11,13 @@ public class EndGame : MonoBehaviour
     
     [SerializeField] private GameObject loseImage;
 
+    [SerializeField] private TurnManager turnManager;
+
     public void GetEndGame(bool win)
     {
         finishImage.SetActive(true);
-        
+        turnManager.HideFeedbackTrun();
+
         if (win)
             winImage.SetActive(true);
         else

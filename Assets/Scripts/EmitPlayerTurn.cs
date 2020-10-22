@@ -16,13 +16,13 @@ public class EmitPlayerTurn : MonoBehaviour
 
     public void EmitTurn(string value)
     {
+        turnManager.ShowNotMyTurnText();
+
         randomButtons.CheckConditionToWin(int.Parse(value));
         
         randomButtons.ButtonPressed(int.Parse(value));
         
         connection.socket.Emit("emit turn", JSONObject.CreateStringObject(value));
-        
-        turnManager.ShowNotMyTurnText();
 
 #if UNITY_EDITOR
         Debug.Log("Emit turn by player");

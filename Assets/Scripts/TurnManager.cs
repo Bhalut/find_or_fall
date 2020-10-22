@@ -5,7 +5,8 @@
 
 public class TurnManager : MonoBehaviour
 {
-    [SerializeField] private GameObject image;
+    [SerializeField] private GameObject backgroundText;
+    [SerializeField] private GameObject boardCover;
     [SerializeField] private GameObject yourTurnText;
     [SerializeField] private GameObject notYourTurnText;
 
@@ -26,13 +27,21 @@ public class TurnManager : MonoBehaviour
     {
         notYourTurnText.SetActive(false);
         yourTurnText.SetActive(true);
-        image.SetActive(false);
+        boardCover.SetActive(false);
     }
 
     public void ShowNotMyTurnText()
     {
         notYourTurnText.SetActive(true);
         yourTurnText.SetActive(false);
-        image.SetActive(true);
+        boardCover.SetActive(true);
+    }
+
+    public void HideFeedbackTrun()
+    {
+        notYourTurnText.SetActive(false);
+        yourTurnText.SetActive(false);
+        boardCover.SetActive(false);
+        backgroundText.SetActive(false);
     }
 }
