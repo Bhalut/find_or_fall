@@ -20,7 +20,7 @@ public class ButtonManager : MonoBehaviour
     {
         connection = FindObjectOfType<Connection>();
         
-        Connection.buttons = this;
+        Connection.Buttons = this;
     }
 
     private static void OpenGate(Behaviour collider2D)
@@ -39,7 +39,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (buttonPressed == Connection.Button1)
         {
-            if (connection.socket.sid == connection.player1_id)
+            if (connection.socket.sid == connection.player1ID)
             {
                 //lose
                 endGame.GetEndGame(false);
@@ -62,7 +62,7 @@ public class ButtonManager : MonoBehaviour
         }
         else if (buttonPressed == Connection.Button2)
         {
-            if (connection.socket.sid == connection.player1_id)
+            if (connection.socket.sid == connection.player1ID)
             {
                 //win
                 endGame.GetEndGame(true);

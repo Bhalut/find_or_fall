@@ -2,27 +2,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Connection : MonoBehaviour
+public class Connection : Singleton<Connection>
 {
     public static int Button1;
 
     public static int Button2;
 
-    public static ButtonManager buttons;
+    public static ButtonManager Buttons;
 
-    public static TurnManager turnManager;
+    public static TurnManager TurnManager;
 
-    public static OpponentDisconnected opponentDisconnected;
+    public static OpponentDisconnected OpponentDisconnected;
 
-    public string player1_id;
+    public string player1ID;
 
     public SocketIOComponent socket;
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
+    
     private void Start()
     {
         socket.On("open", OnOpen);
@@ -45,28 +40,28 @@ public class Connection : MonoBehaviour
         socket.Off("opponent username", OnOpponentUsername);
     }
 
-    public void OnOpen(SocketIOEvent e)
+    private void OnOpen(SocketIOEvent e)
     {
 #if UNITY_EDITOR
         Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
 #endif
     }
 
-    public void OnError(SocketIOEvent e)
+    private void OnError(SocketIOEvent e)
     {
 #if UNITY_EDITOR
         Debug.Log("[SocketIO] Error received: " + e.name + " " + e.data);
 #endif
     }
 
-    public void OnClose(SocketIOEvent e)
+    private void OnClose(SocketIOEvent e)
     {
 #if UNITY_EDITOR
         Debug.Log("[SocketIO] Close received: " + e.name + " " + e.data);
 #endif
     }
 
-    public void OnOpponentDisconnected(SocketIOEvent e)
+    private void OnOpponentDisconnected(SocketIOEvent e)
     {
 #if UNITY_EDITOR
         Debug.Log("Opponent Disconnected");
@@ -74,7 +69,7 @@ public class Connection : MonoBehaviour
 
         socket.Close();
 
-        opponentDisconnected.ShowScreenOpponentDisconnected();
+        OpponentDisconnected.ShowScreenOpponentDisconnected();
         //Notification on screen and stop the game
     }
 
@@ -88,7 +83,7 @@ public class Connection : MonoBehaviour
 
         Button2 = int.Parse(e.data.GetField("button_2").str);
 
-        player1_id = e.data.GetField("player1_id").str;
+        player1ID = e.data.GetField("player1_id").str;
 
         SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
 
@@ -100,11 +95,11 @@ public class Connection : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("My Turn, the opponent send: " + e.data.GetField("button"));
 #endif
-        turnManager.ShowMyTurnText();
+        TurnManager.ShowMyTurnText();
         var button = int.Parse(e.data.GetField("button").str);
-        buttons.DisableButton(button);
-        buttons.ButtonPressed(button);
-        buttons.CheckConditionToWin(button);
+        Buttons.DisableButton(button);
+        Buttons.ButtonPressed(button);
+        Buttons.CheckConditionToWin(button);
     }
 
     private void OnOpponentUsername(SocketIOEvent e)

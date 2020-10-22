@@ -16,11 +16,11 @@ public class TurnManager : MonoBehaviour
     {
         connection = FindObjectOfType<Connection>();
 
-        if (connection.socket.sid == connection.player1_id)
+        if (connection.socket.sid == connection.player1ID)
             ShowMyTurnText();
         else ShowNotMyTurnText();
 
-        Connection.turnManager = this;
+        Connection.TurnManager = this;
     }
 
     public void ShowMyTurnText()

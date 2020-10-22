@@ -12,7 +12,7 @@ public class OpponentDisconnected : MonoBehaviour
 
     private void Start()
     {
-        Connection.opponentDisconnected = this;
+        Connection.OpponentDisconnected = this;
     }
 
     public void ShowScreenOpponentDisconnected()
