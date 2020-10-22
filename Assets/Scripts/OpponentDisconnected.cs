@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class OpponentDisconnected : MonoBehaviour
 {
     [SerializeField] private GameObject screenOpponentDisconnected;
+    [SerializeField] private EndGame endGame;
 
     private void Start()
     {
@@ -12,7 +13,8 @@ public class OpponentDisconnected : MonoBehaviour
 
     public void ShowScreenOpponentDisconnected()
     {
-        screenOpponentDisconnected.SetActive(true);
+        if (!endGame.IsEndGame())
+            screenOpponentDisconnected.SetActive(true);
     }
 
     public void BackToMenu()

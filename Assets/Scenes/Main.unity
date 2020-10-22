@@ -4359,6 +4359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenOpponentDisconnected: {fileID: 1354254483}
+  endGame: {fileID: 2136428207}
 --- !u!114 &2136428207
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,4 +20,10 @@ public class EndGame : MonoBehaviour
         else
             loseImage.SetActive(true);
     }
+
+    public bool IsEndGame()
+    {
+        if(finishImage.activeSelf) return true;
+        else return false;
+    }
 }
