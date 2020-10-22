@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#pragma warning disable 618
+#pragma warning disable 649
+
 public class OpponentDisconnected : MonoBehaviour
 {
     [SerializeField] private GameObject screenOpponentDisconnected;
+
     [SerializeField] private EndGame endGame;
 
     private void Start()

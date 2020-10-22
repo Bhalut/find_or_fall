@@ -2,21 +2,21 @@
 
 public class Background : MonoBehaviour
 {
-	public float scrollSpeed;
-	
-	public float tileSizeZ;
+    public float scrollSpeed;
 
-	private Vector3 _startPosition;
+    public float tileSizeZ;
 
-	private void Start()
-	{
-		_startPosition = transform.position;
-	}
+    private Vector3 _startPosition;
 
-	private void Update()
-	{
-		var newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
-		
-		transform.position = _startPosition + Vector3.left * newPosition;
-	}
+    private void Start()
+    {
+        _startPosition = transform.position;
+    }
+
+    private void Update()
+    {
+        var newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
+
+        transform.position = _startPosition + Vector3.left * newPosition;
+    }
 }

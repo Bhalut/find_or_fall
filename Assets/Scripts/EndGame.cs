@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 #pragma warning disable 618
 #pragma warning disable 649
@@ -9,12 +6,15 @@ using UnityEngine.SceneManagement;
 public class EndGame : MonoBehaviour
 {
     [SerializeField] private GameObject finishImage;
+    
     [SerializeField] private GameObject winImage;
+    
     [SerializeField] private GameObject loseImage;
 
     public void GetEndGame(bool win)
     {
         finishImage.SetActive(true);
+        
         if (win)
             winImage.SetActive(true);
         else
@@ -23,7 +23,6 @@ public class EndGame : MonoBehaviour
 
     public bool IsEndGame()
     {
-        if(finishImage.activeSelf) return true;
-        else return false;
+        return finishImage.activeSelf;
     }
 }

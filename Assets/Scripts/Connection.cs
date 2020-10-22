@@ -1,23 +1,22 @@
 ﻿using SocketIO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
 public class Connection : MonoBehaviour
 {
     public static int Button1;
-    
+
     public static int Button2;
-
-    public string player1_id;
-
-    public SocketIOComponent socket;
 
     public static ButtonManager buttons;
 
     public static TurnManager turnManager;
 
     public static OpponentDisconnected opponentDisconnected;
+
+    public string player1_id;
+
+    public SocketIOComponent socket;
 
     private void Awake()
     {
@@ -72,7 +71,7 @@ public class Connection : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("Opponent Disconnected");
 #endif
-        
+
         socket.Close();
 
         opponentDisconnected.ShowScreenOpponentDisconnected();
@@ -96,7 +95,7 @@ public class Connection : MonoBehaviour
         EmitUsername();
     }
 
-    public void OnMyTurn(SocketIOEvent e)
+    private void OnMyTurn(SocketIOEvent e)
     {
 #if UNITY_EDITOR
         Debug.Log("My Turn, the opponent send: " + e.data.GetField("button"));
@@ -108,14 +107,14 @@ public class Connection : MonoBehaviour
         turnManager.ShowMyTurnText();
     }
 
-    public void OnOpponentUsername(SocketIOEvent e)
+    private void OnOpponentUsername(SocketIOEvent e)
     {
 #if UNITY_EDITOR
         Debug.Log("Opponent username: " + e.data.GetField("username"));
 #endif
     }
-    
-    public void EmitUsername()
+
+    private void EmitUsername()
     {
         var username = "name" + Random.Range(100, 999);
 

@@ -10,19 +10,18 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private GameObject notYourTurnText;
 
     private Connection connection;
-    
-    void Start()
+
+    private void Start()
     {
         connection = FindObjectOfType<Connection>();
 
-        if(connection.socket.sid == connection.player1_id)
-        {
+        if (connection.socket.sid == connection.player1_id)
             ShowMyTurnText();
-        }
         else ShowNotMyTurnText();
-        
+
         Connection.turnManager = this;
     }
+
     public void ShowMyTurnText()
     {
         notYourTurnText.SetActive(false);
