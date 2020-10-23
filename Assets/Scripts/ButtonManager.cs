@@ -14,6 +14,10 @@ public class ButtonManager : MonoBehaviour
 
     [SerializeField] private EndGame endGame;
 
+    [SerializeField] private Animator playeronefall;
+
+    [SerializeField] private Animator playertwofall;
+
     private Connection connection;
 
     private void Start()
@@ -43,21 +47,24 @@ public class ButtonManager : MonoBehaviour
             {
                 //lose
                 endGame.GetEndGame(false);
-                
+                playeronefall.SetBool("IsFalling", true);
+
+
 #if UNITY_EDITOR
                 Debug.Log("lose");
 #endif
-                
+
             }
             else
             {
                 // win
                 endGame.GetEndGame(true);
-                
+                playeronefall.SetBool("IsFalling", true);
+
 #if UNITY_EDITOR
                 Debug.Log("win"); 
 #endif
-                
+
             }
         }
         else if (buttonPressed == Connection.Button2)
@@ -66,21 +73,24 @@ public class ButtonManager : MonoBehaviour
             {
                 //win
                 endGame.GetEndGame(true);
-                
+                playertwofall.SetBool("TwoIsFalling", true);
+
 #if UNITY_EDITOR
                 Debug.Log("win");
 #endif
-                
+
             }
             else
             {
                 // lose
                 endGame.GetEndGame(false);
-                
+                playertwofall.SetBool("TwoIsFalling", true);
+
+
 #if UNITY_EDITOR
                 Debug.Log("lose");
 #endif
-                
+
             }
         }
     }
