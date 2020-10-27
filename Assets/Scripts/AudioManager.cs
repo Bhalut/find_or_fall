@@ -33,6 +33,18 @@ public class AudioManager : MonoBehaviour
             case 3:
                 soundSource.PlayOneShot(clip[3]);
                 break;
+            case 4:
+                soundSource.PlayOneShot(clip[4]);
+                break;
+            case 5:
+                soundSource.PlayOneShot(clip[5]);
+                break;
+            case 6:
+                soundSource.PlayOneShot(clip[6]);
+                break;
+            case 7:
+                soundSource.PlayOneShot(clip[7]);
+                break;
             default:
                 break;
         }
@@ -49,5 +61,10 @@ public class AudioManager : MonoBehaviour
     {
         musicSource.volume = PlayerPrefs.GetFloat("musicVolume", musicSource.volume);
         soundSource.volume = PlayerPrefs.GetFloat("soundVolume", soundSource.volume);
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
     }
 }

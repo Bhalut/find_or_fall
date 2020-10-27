@@ -18,6 +18,8 @@ public class ButtonManager : MonoBehaviour
 
     [SerializeField] private Animator playertwofall;
 
+    [SerializeField] private AudioManager audioManager;
+
     private Connection connection;
 
     private void Start()
@@ -39,41 +41,50 @@ public class ButtonManager : MonoBehaviour
         else if (buttonPressed == Connection.Button2) OpenGate(gateTwo.GetComponent<Collider2D>());
     }
 
-    public void CheckConditionToWin(int buttonPressed)
+    public void CheckConditionToWin(int buttonPressed, bool me)
     {
         if (buttonPressed == Connection.Button1)
         {
+            audioManager.StopMusic();
+
             if (connection.socket.sid == connection.player1ID)
             {
                 //lose
                 endGame.GetEndGame(false);
                 playeronefall.SetBool("IsFalling", true);
 
+                // sound: fall
+                audioManager.ShotAudio(7);
+
+                if(me) audioManager.ShotAudio(4); // sound: lose-self
+                else audioManager.ShotAudio(5); // sound: lose
 
 #if UNITY_EDITOR
                 Debug.Log("lose");
 #endif
-
             }
             else
             {
                 // win
                 endGame.GetEndGame(true);
                 playeronefall.SetBool("IsFalling", true);
+                audioManager.ShotAudio(6);
 
 #if UNITY_EDITOR
                 Debug.Log("win"); 
 #endif
-
             }
         }
         else if (buttonPressed == Connection.Button2)
         {
+            audioManager.StopMusic();
+
             if (connection.socket.sid == connection.player1ID)
             {
                 //win
                 endGame.GetEndGame(true);
                 playertwofall.SetBool("TwoIsFalling", true);
+                audioManager.ShotAudio(6);
 
 #if UNITY_EDITOR
                 Debug.Log("win");
@@ -86,11 +97,15 @@ public class ButtonManager : MonoBehaviour
                 endGame.GetEndGame(false);
                 playertwofall.SetBool("TwoIsFalling", true);
 
+                // sound: fall
+                audioManager.ShotAudio(7);
+
+                if(me) audioManager.ShotAudio(4); // sound: lose-self
+                else audioManager.ShotAudio(5); // sound: lose
 
 #if UNITY_EDITOR
                 Debug.Log("lose");
 #endif
-
             }
         }
     }

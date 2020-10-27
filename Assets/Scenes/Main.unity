@@ -4213,6 +4213,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f5525e620863cdf429222dc802c0aaad, type: 3}
   - {fileID: 8300000, guid: a17fa3ab04ac6384b8707d2f9122992d, type: 3}
   - {fileID: 8300000, guid: 9ba5ffb6424e1fc4e98e7e051e709a4b, type: 3}
+  - {fileID: 8300000, guid: e39a95456c3a82c488266c0032dc8d4b, type: 3}
+  - {fileID: 8300000, guid: 3314beabf15762741b0d32c3a27805b3, type: 3}
+  - {fileID: 8300000, guid: 31bfec3d3eca97647b1085879cc30c96, type: 3}
+  - {fileID: 8300000, guid: b5f6693b76ea0a24d8dd86da949abdb2, type: 3}
 --- !u!82 &1015472446
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4563,7 +4567,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -741296235
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 54c2680282416bc46abed99c7ff9d0a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4725,7 +4729,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1996112637
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b1fe0b58d85c64546b3cdb101743213e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4909,7 +4913,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1996112637
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8905870acec5b854b8acb4fa8b0e6b80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6918,6 +6922,7 @@ MonoBehaviour:
   endGame: {fileID: 2136428207}
   playeronefall: {fileID: 1143020500}
   playertwofall: {fileID: 1145885511}
+  audioManager: {fileID: 1015472445}
 --- !u!114 &2136428204
 MonoBehaviour:
   m_ObjectHideFlags: 0

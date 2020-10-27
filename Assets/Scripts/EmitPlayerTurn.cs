@@ -18,7 +18,7 @@ public class EmitPlayerTurn : MonoBehaviour
     {
         turnManager.ShowNotMyTurnText();
 
-        randomButtons.CheckConditionToWin(int.Parse(value));
+        randomButtons.CheckConditionToWin(int.Parse(value), true);
         
         randomButtons.ButtonPressed(int.Parse(value));
         

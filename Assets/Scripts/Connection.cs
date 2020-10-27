@@ -101,7 +101,7 @@ public class Connection : MonoBehaviour
         var button = int.Parse(e.data.GetField("button").str);
         Buttons.DisableButton(button);
         Buttons.ButtonPressed(button);
-        Buttons.CheckConditionToWin(button);
+        Buttons.CheckConditionToWin(button, false);
     }
 
     private void OnOpponentUsername(SocketIOEvent e)
