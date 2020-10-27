@@ -9,6 +9,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private GameObject boardCover;
     [SerializeField] private GameObject yourTurnText;
     [SerializeField] private GameObject notYourTurnText;
+    [SerializeField] private GameObject youPlayer1;
+    [SerializeField] private GameObject youPlayer2;
 
     private Connection connection;
 
@@ -21,6 +23,11 @@ public class TurnManager : MonoBehaviour
         else ShowNotMyTurnText();
 
         Connection.TurnManager = this;
+
+        if(connection.socket.sid == connection.player1ID)
+            youPlayer1.SetActive(true);
+        else
+            youPlayer2.SetActive(true);
     }
 
     public void ShowMyTurnText()
