@@ -1,8 +1,8 @@
-﻿using SocketIO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using SocketIO;
 
-public class Connection : Singleton<Connection>
+public class Connection : MonoBehaviour
 {
     public static int Button1;
 
@@ -17,9 +17,11 @@ public class Connection : Singleton<Connection>
     public string player1ID;
 
     public SocketIOComponent socket;
-    
+
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
         socket.On("open", OnOpen);
         socket.On("error", OnError);
         socket.On("close", OnClose);
@@ -69,8 +71,8 @@ public class Connection : Singleton<Connection>
 
         socket.Close();
 
-        OpponentDisconnected.ShowScreenOpponentDisconnected();
         //Notification on screen and stop the game
+        OpponentDisconnected.ShowScreenOpponentDisconnected();
     }
 
     private void OnStartGame(SocketIOEvent e)

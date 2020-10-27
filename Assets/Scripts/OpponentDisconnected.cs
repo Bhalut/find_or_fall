@@ -10,8 +10,11 @@ public class OpponentDisconnected : MonoBehaviour
 
     [SerializeField] private EndGame endGame;
 
+    private Connection connection;
+
     private void Start()
     {
+        connection = FindObjectOfType<Connection>();
         Connection.OpponentDisconnected = this;
     }
 
@@ -24,5 +27,6 @@ public class OpponentDisconnected : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Single);
+        Destroy(connection.gameObject);
     }
 }
