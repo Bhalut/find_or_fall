@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using TMPro;
+using System.Collections;
 
 #pragma warning disable 618
 #pragma warning disable 649
@@ -9,8 +11,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private GameObject boardCover;
     [SerializeField] private GameObject yourTurnText;
     [SerializeField] private GameObject notYourTurnText;
-    [SerializeField] private GameObject youPlayer1;
-    [SerializeField] private GameObject youPlayer2;
+    [SerializeField] private TextMeshProUGUI namePlayer1;
+    [SerializeField] private TextMeshProUGUI namePlayer2;
 
     private Connection connection;
 
@@ -18,16 +20,13 @@ public class TurnManager : MonoBehaviour
     {
         connection = FindObjectOfType<Connection>();
 
-        if (connection.socket.sid == connection.player1ID)
+        if(connection.socket.sid == connection.player1ID)
             ShowMyTurnText();
         else ShowNotMyTurnText();
 
         Connection.TurnManager = this;
 
-        if(connection.socket.sid == connection.player1ID)
-            youPlayer1.SetActive(true);
-        else
-            youPlayer2.SetActive(true);
+        StartCoroutine(WaitOpponentName());
     }
 
     public void ShowMyTurnText()
@@ -50,5 +49,18 @@ public class TurnManager : MonoBehaviour
         yourTurnText.SetActive(false);
         boardCover.SetActive(false);
         backgroundText.SetActive(false);
+    }
+
+    IEnumerator WaitOpponentName()
+    {
+        while(PlayerPrefs.GetString("opponent username") == "")
+        {
+            yield return new WaitForSeconds(.3f);
+        }
+        if(connection.socket.sid == connection.player1ID)
+            namePlayer2.text = PlayerPrefs.GetString("opponent username");
+        else
+            namePlayer1.text = PlayerPrefs.GetString("opponent username");
+        yield return null;
     }
 }

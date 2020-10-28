@@ -21,6 +21,7 @@ public class Connection : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        PlayerPrefs.SetString("opponent username", "");
 
         socket.On("open", OnOpen);
         socket.On("error", OnError);
@@ -109,12 +110,11 @@ public class Connection : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("Opponent username: " + e.data.GetField("username"));
 #endif
+        PlayerPrefs.SetString("opponent username", e.data.GetField("username").str);
     }
 
     private void EmitUsername()
     {
-        var username = "name" + Random.Range(100, 999);
-
-        socket.Emit("emit username", JSONObject.CreateStringObject(username));
+        socket.Emit("emit username", JSONObject.CreateStringObject(PlayerPrefs.GetString("username")));
     }
 }
