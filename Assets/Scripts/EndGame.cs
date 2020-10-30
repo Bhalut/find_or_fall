@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System;
 
 #pragma warning disable 618
 #pragma warning disable 649
@@ -15,7 +17,7 @@ public class EndGame : MonoBehaviour
 
     public void GetEndGame(bool win)
     {
-        finishImage.SetActive(true);
+        this.Invoke(() => finishImage.SetActive(true), 4.0f);
         turnManager.HideFeedbackTrun();
 
         if (win)

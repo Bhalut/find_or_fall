@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System;
 
 #pragma warning disable 618
 #pragma warning disable 649
@@ -18,6 +20,8 @@ public class ButtonManager : MonoBehaviour
 
     [SerializeField] private Animator playertwofall;
 
+    [SerializeField] private Animator opengates;
+
     [SerializeField] private AudioManager audioManager;
 
     private Connection connection;
@@ -25,7 +29,7 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         connection = FindObjectOfType<Connection>();
-        
+
         Connection.Buttons = this;
     }
 
@@ -37,8 +41,16 @@ public class ButtonManager : MonoBehaviour
     public void ButtonPressed(int buttonPressed)
     {
         if (buttonPressed == Connection.Button1)
-            OpenGate(gateOne.GetComponent<Collider2D>());
-        else if (buttonPressed == Connection.Button2) OpenGate(gateTwo.GetComponent<Collider2D>());
+        {
+            this.Invoke(() => OpenGate(gateOne.GetComponent<Collider2D>()), 1.5f);
+            //OpenGate(gateOne.GetComponent<Collider2D>());
+        }
+        else if (buttonPressed == Connection.Button2)
+        {
+            this.Invoke(() => OpenGate(gateTwo.GetComponent<Collider2D>()), 1.5f);
+            //OpenGate(gateTwo.GetComponent<Collider2D>());
+        }
+
     }
 
     public void CheckConditionToWin(int buttonPressed, bool me)
@@ -50,13 +62,14 @@ public class ButtonManager : MonoBehaviour
             if (connection.socket.sid == connection.player1ID)
             {
                 //lose
-                endGame.GetEndGame(false);
                 playeronefall.SetBool("IsFalling", true);
+                opengates.SetBool("LosePlayerOne", true);
+                endGame.GetEndGame(false);
 
                 // sound: fall
                 audioManager.ShotAudio(7);
 
-                if(me) audioManager.ShotAudio(4); // sound: lose-self
+                if (me) audioManager.ShotAudio(4); // sound: lose-self
                 else audioManager.ShotAudio(5); // sound: lose
 
 #if UNITY_EDITOR
@@ -66,9 +79,10 @@ public class ButtonManager : MonoBehaviour
             else
             {
                 // win
-                endGame.GetEndGame(true);
                 playeronefall.SetBool("IsFalling", true);
+                opengates.SetBool("LosePlayerOne", true);
                 audioManager.ShotAudio(6);
+                endGame.GetEndGame(true);
 
 #if UNITY_EDITOR
                 Debug.Log("win"); 
@@ -82,9 +96,10 @@ public class ButtonManager : MonoBehaviour
             if (connection.socket.sid == connection.player1ID)
             {
                 //win
-                endGame.GetEndGame(true);
                 playertwofall.SetBool("TwoIsFalling", true);
+                opengates.SetBool("LosePlayerTwo", true);
                 audioManager.ShotAudio(6);
+                endGame.GetEndGame(true);
 
 #if UNITY_EDITOR
                 Debug.Log("win");
@@ -94,13 +109,14 @@ public class ButtonManager : MonoBehaviour
             else
             {
                 // lose
-                endGame.GetEndGame(false);
                 playertwofall.SetBool("TwoIsFalling", true);
+                opengates.SetBool("LosePlayerTwo", true);
+                endGame.GetEndGame(false);
 
                 // sound: fall
                 audioManager.ShotAudio(7);
 
-                if(me) audioManager.ShotAudio(4); // sound: lose-self
+                if (me) audioManager.ShotAudio(4); // sound: lose-self
                 else audioManager.ShotAudio(5); // sound: lose
 
 #if UNITY_EDITOR
@@ -113,5 +129,19 @@ public class ButtonManager : MonoBehaviour
     public void DisableButton(int button)
     {
         buttons[button].interactable = false;
+    }
+}
+
+public static class Utility
+{
+    public static void Invoke(this MonoBehaviour mb, Action f, float delay)
+    {
+        mb.StartCoroutine(InvokeRoutine(f, delay));
+    }
+
+    private static IEnumerator InvokeRoutine(System.Action f, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        f();
     }
 }
