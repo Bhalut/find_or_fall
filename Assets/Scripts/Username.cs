@@ -4,6 +4,9 @@ using UnityEngine;
 using System.IO;
 using TMPro;
 
+#pragma warning disable 618
+#pragma warning disable 649
+
 /// <summary>
 /// Contains the methods to manage both players names
 /// </summary>
