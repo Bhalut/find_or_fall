@@ -4,6 +4,9 @@ using UnityEngine;
 using System.IO;
 using TMPro;
 
+/// <summary>
+/// Contains the methods to manage both players names
+/// </summary>
 public class Username : MonoBehaviour
 {
     private TouchScreenKeyboard keyboard;
@@ -19,12 +22,18 @@ public class Username : MonoBehaviour
 		username.text = PlayerPrefs.GetString("username");
 	}
 
+	/// <summary>
+    /// Opens the device keyboard
+    /// </summary>
 	public void OpenKeyboard() 
 	{
 		keyboard = TouchScreenKeyboard.Open(username.text, TouchScreenKeyboardType.Default);
 		keyboard.characterLimit = 25;
 	}
 
+	/// <summary>
+    /// Sets the name and hide the device's keyboard
+    /// </summary>
 	void LateUpdate()
 	{
 		if(keyboard != null && keyboard.status == TouchScreenKeyboard.Status.Done)

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Contains all the methods for background movement
+/// </summary>
 public class Background : MonoBehaviour
 {
     public float scrollSpeed;

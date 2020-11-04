@@ -2,6 +2,9 @@
 using UnityEngine.SceneManagement;
 using SocketIO;
 
+/// <summary>
+/// Contains all the methods for performing connection between two players
+/// </summary>
 public class Connection : MonoBehaviour
 {
     public static int Button1;
@@ -32,6 +35,9 @@ public class Connection : MonoBehaviour
         socket.On("opponent username", OnOpponentUsername);
     }
 
+    /// <summary>
+    /// Triggers an event when disabled
+    /// </summary>
     private void OnDisable()
     {
         socket.Off("open", OnOpen);
@@ -43,6 +49,10 @@ public class Connection : MonoBehaviour
         socket.Off("opponent username", OnOpponentUsername);
     }
 
+    /// <summary>
+    /// Log to check everything is fine
+    /// </summary>
+    /// <param name="e"></param>
     private void OnOpen(SocketIOEvent e)
     {
 #if UNITY_EDITOR
@@ -50,6 +60,10 @@ public class Connection : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// Log to check errors
+    /// </summary>
+    /// <param name="e"></param>
     private void OnError(SocketIOEvent e)
     {
 #if UNITY_EDITOR
@@ -57,6 +71,10 @@ public class Connection : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// Log to check the correct close
+    /// </summary>
+    /// <param name="e"></param>
     private void OnClose(SocketIOEvent e)
     {
 #if UNITY_EDITOR
@@ -64,6 +82,10 @@ public class Connection : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// When other player is disconnected closes the connection
+    /// </summary>
+    /// <param name="e"></param>
     private void OnOpponentDisconnected(SocketIOEvent e)
     {
 #if UNITY_EDITOR
@@ -76,6 +98,10 @@ public class Connection : MonoBehaviour
         OpponentDisconnected.ShowScreenOpponentDisconnected();
     }
 
+    /// <summary>
+    /// Sets the data on the beggining of the game
+    /// </summary>
+    /// <param name="e"></param>
     private void OnStartGame(SocketIOEvent e)
     {
 #if UNITY_EDITOR
@@ -93,6 +119,10 @@ public class Connection : MonoBehaviour
         EmitUsername();
     }
 
+    /// <summary>
+    /// Checks the events on each player turn
+    /// </summary>
+    /// <param name="e"></param>
     private void OnMyTurn(SocketIOEvent e)
     {
 #if UNITY_EDITOR
@@ -105,6 +135,10 @@ public class Connection : MonoBehaviour
         Buttons.CheckConditionToWin(button, false);
     }
 
+    /// <summary>
+    /// Displays the opponent's name
+    /// </summary>
+    /// <param name="e"></param>
     private void OnOpponentUsername(SocketIOEvent e)
     {
 #if UNITY_EDITOR
@@ -113,6 +147,9 @@ public class Connection : MonoBehaviour
         PlayerPrefs.SetString("opponent username", e.data.GetField("username").str);
     }
 
+    /// <summary>
+    /// Emits the name of players
+    /// </summary>
     private void EmitUsername()
     {
         socket.Emit("emit username", JSONObject.CreateStringObject(PlayerPrefs.GetString("username")));

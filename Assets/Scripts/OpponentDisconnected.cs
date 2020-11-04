@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 #pragma warning disable 618
 #pragma warning disable 649
 
+/// <summary>
+/// Contains methods to manage the events when opponenet is disconnected
+/// </summary>
 public class OpponentDisconnected : MonoBehaviour
 {
     [SerializeField] private GameObject screenOpponentDisconnected;
@@ -18,12 +21,18 @@ public class OpponentDisconnected : MonoBehaviour
         Connection.OpponentDisconnected = this;
     }
 
+    /// <summary>
+    /// Displays the pop-up message
+    /// </summary>
     public void ShowScreenOpponentDisconnected()
     {
         if (!endGame.IsEndGame())
             screenOpponentDisconnected.SetActive(true);
     }
 
+    /// <summary>
+    /// Returns to the main menu
+    /// </summary>
     public void BackToMenu()
     {
         SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Single);

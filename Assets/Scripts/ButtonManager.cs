@@ -6,6 +6,9 @@ using System;
 #pragma warning disable 618
 #pragma warning disable 649
 
+/// <summary>
+/// Contains all the methods for buttons management
+/// </summary>
 public class ButtonManager : MonoBehaviour
 {
     [SerializeField] private Button[] buttons;
@@ -33,11 +36,19 @@ public class ButtonManager : MonoBehaviour
         Connection.Buttons = this;
     }
 
+    /// <summary>
+    /// Deactivates the collider2d object to make the gates open
+    /// </summary>
+    /// <param name="collider2D"></param>
     private static void OpenGate(Behaviour collider2D)
     {
         collider2D.enabled = false;
     }
 
+    /// <summary>
+    /// Checks if the button pressed open the gates
+    /// </summary>
+    /// <param name="buttonPressed"></param>
     public void ButtonPressed(int buttonPressed)
     {
         if (buttonPressed == Connection.Button1)
@@ -53,6 +64,11 @@ public class ButtonManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Checks the winner and trigger the events to display
+    /// </summary>
+    /// <param name="buttonPressed"></param>
+    /// <param name="me"></param>
     public void CheckConditionToWin(int buttonPressed, bool me)
     {
         if (buttonPressed == Connection.Button1)
@@ -132,6 +148,9 @@ public class ButtonManager : MonoBehaviour
     }
 }
 
+/// <summary>
+/// Contains methods for utilities
+/// </summary>
 public static class Utility
 {
     public static void Invoke(this MonoBehaviour mb, Action f, float delay)

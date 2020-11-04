@@ -5,6 +5,9 @@ using System.Collections;
 #pragma warning disable 618
 #pragma warning disable 649
 
+/// <summary>
+/// Contains the methods to manage the player's turn
+/// </summary>
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] private GameObject backgroundText;
@@ -29,6 +32,9 @@ public class TurnManager : MonoBehaviour
         StartCoroutine(WaitOpponentName());
     }
 
+    /// <summary>
+    /// Displays text when turn
+    /// </summary>
     public void ShowMyTurnText()
     {
         notYourTurnText.SetActive(false);
@@ -36,6 +42,9 @@ public class TurnManager : MonoBehaviour
         boardCover.SetActive(false);
     }
 
+    /// <summary>
+    /// Displays text when opponent's turn
+    /// </summary>
     public void ShowNotMyTurnText()
     {
         notYourTurnText.SetActive(true);
@@ -43,6 +52,9 @@ public class TurnManager : MonoBehaviour
         boardCover.SetActive(true);
     }
 
+    /// <summary>
+    /// Hides all the texts
+    /// </summary>
     public void HideFeedbackTrun()
     {
         notYourTurnText.SetActive(false);
@@ -51,6 +63,10 @@ public class TurnManager : MonoBehaviour
         backgroundText.SetActive(false);
     }
 
+    /// <summary>
+    /// Waits for name verification
+    /// </summary>
+    /// <returns></returns>
     IEnumerator WaitOpponentName()
     {
         while(PlayerPrefs.GetString("opponent username") == "")
