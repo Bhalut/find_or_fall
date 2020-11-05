@@ -66,7 +66,7 @@ Here a [video tutorial](https://www.youtube.com/watch?v=J0udhTJwR88&t=1104s&ab_c
 
 You can test with a server on 'localhost' using our backend codebase [backend-find_or_fall](https://github.com/KaroDev3/backend-find_or_fall). Which use node.js + socket.io. There you can find the installation and execution instructions.
 
-![architecture](./pictures/architecture.jpg?raw=true "architecture")
+![architecture](./pictures/Architecture.jpg?raw=true "architecture")
 
 ### Team
 
