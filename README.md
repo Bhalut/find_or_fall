@@ -33,6 +33,8 @@ https://github.com/KaroDev3/backend-find_or_fall
 
 Open the scene 'opening', and press the play button of the editor.
 
+![run](./pictures/run.jpg?raw=true "run")
+
 ### Scripts ('Assests/Scripts')
 
 - AudioManager.cs: Turns the audio on or off.
@@ -52,7 +54,7 @@ Open the scene 'opening', and press the play button of the editor.
 - Menu: Displays the button to start the game and a settings button.
 - Main: The game scene.
 
-### Socket.io ('Assests/SocketIO')
+### SocketIO ('Assests/SocketIO')
 
 This is s a free library: [Socket.IO for Unity](https://assetstore.unity.com/packages/tools/network/socket-io-for-unity-21721).
 
@@ -62,7 +64,9 @@ Here a [video tutorial](https://www.youtube.com/watch?v=J0udhTJwR88&t=1104s&ab_c
 
 ### Infrastructure
 
+You can test with a server on 'localhost' using our backend codebase [backend-find_or_fall](https://github.com/KaroDev3/backend-find_or_fall). Which use node.js + socket.io. There you can find the installation and execution instructions.
 
+![architecture](./pictures/architecture.jpg?raw=true "architecture")
 
 ### Team
 
@@ -71,4 +75,3 @@ Here a [video tutorial](https://www.youtube.com/watch?v=J0udhTJwR88&t=1104s&ab_c
 - Diana Quintero, Backend.
 - Eddy Zapata, Unity Developer (Gameplay).
 - Abdel Mejía, Unity Developer.
-
