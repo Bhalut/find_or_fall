@@ -58,6 +58,12 @@ This is s a free library: [Socket.IO for Unity](https://assetstore.unity.com/pac
 
 With this library we can easily connect to the backend using the web socket protocol.
 
+Here a [video tutorial](https://www.youtube.com/watch?v=J0udhTJwR88&t=1104s&ab_channel=AlexHicks) to learn how to use it.
+
+### Infrastructure
+
+
+
 ### Team
 
 - Nicolas Quinchia, Unity Developer (Gameplay) / Graphic designer.
