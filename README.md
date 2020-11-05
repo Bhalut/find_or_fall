@@ -1,7 +1,3 @@
-
-ruta de los scripts
-- x.sc -> hace esto
-
 ![cover](./pictures/cover.png?raw=true "Cover")
 
 # Find or Fall
@@ -33,9 +29,34 @@ https://github.com/KaroDev3/backend-find_or_fall
 
 2019.4.11f1
 
-### ---
+### Run the game
 
-### ---
+Open the scene 'opening', and press the play button of the editor.
+
+### Scripts ('Assests/Scripts')
+
+- AudioManager.cs: Turns the audio on or off.
+- Background.cs: Moves the background image smoothly on x axis.
+- ButtonManager.cs: Handles the scene events when a button is pressed.
+- Connection.cs: Handles the web socket events.
+- EmmitPlayerTurn.cs: Handles the "send turn" web socket event.
+- EndGame.cs: Displays the end game screen.
+- Loader.cs: Handles the scene management.
+- OpponentDisconnected.cs: Displays the opponent disconnected screen.
+- TurnManager.cs: Handles the game logic.
+- Username.cs: Diplays the user names.
+
+### Scenes ('Assests/Scenes')
+
+- Opening: Displays the splashscreen.
+- Menu: Displays the button to start the game and a settings button.
+- Main: The game scene.
+
+### Socket.io ('Assests/SocketIO')
+
+This is s a free library: [Socket.IO for Unity](https://assetstore.unity.com/packages/tools/network/socket-io-for-unity-21721).
+
+With this library we can easily connect to the backend using the web socket protocol.
 
 ### Team
 
