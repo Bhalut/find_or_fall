@@ -108,11 +108,11 @@ public class Connection : MonoBehaviour
         Debug.Log("[SocketIO] Match complete: " + e.name + " " + e.data);
 #endif
 
-        Button1 = int.Parse(e.data.GetField("button_1").str);
+        Button1 = int.Parse(e.data.GetField("button1").str);
 
-        Button2 = int.Parse(e.data.GetField("button_2").str);
+        Button2 = int.Parse(e.data.GetField("button2").str);
 
-        player1ID = e.data.GetField("player1_id").str;
+        player1ID = e.data.GetField("player1Id").str;
 
         SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
 

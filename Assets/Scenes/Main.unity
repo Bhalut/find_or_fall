@@ -7053,7 +7053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnManager: {fileID: 2136428205}
-  randomButtons: {fileID: 2136428203}
+  buttons: {fileID: 2136428203}
 --- !u!114 &2136428205
 MonoBehaviour:
   m_ObjectHideFlags: 0
