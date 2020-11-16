@@ -16,11 +16,14 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private GameObject notYourTurnText;
     [SerializeField] private TextMeshProUGUI namePlayer1;
     [SerializeField] private TextMeshProUGUI namePlayer2;
+    [SerializeField] private DisplayCountdown displayCountdown;
 
     private Connection connection;
 
     private void Start()
     {
+        displayCountdown = FindObjectOfType<DisplayCountdown>();
+
         connection = FindObjectOfType<Connection>();
 
         if(connection.socket.sid == connection.player1ID)
@@ -40,6 +43,7 @@ public class TurnManager : MonoBehaviour
         notYourTurnText.SetActive(false);
         yourTurnText.SetActive(true);
         boardCover.SetActive(false);
+        displayCountdown.StartCountdown();
     }
 
     /// <summary>
@@ -50,6 +54,7 @@ public class TurnManager : MonoBehaviour
         notYourTurnText.SetActive(true);
         yourTurnText.SetActive(false);
         boardCover.SetActive(true);
+        displayCountdown.StopCountdown();
     }
 
     /// <summary>
