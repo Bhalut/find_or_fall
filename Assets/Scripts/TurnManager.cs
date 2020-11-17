@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-using System.Collections;
 
 #pragma warning disable 618
 #pragma warning disable 649
@@ -22,17 +21,22 @@ public class TurnManager : MonoBehaviour
 
     private void Start()
     {
+        Connection.TurnManager = this;
+
         displayCountdown = FindObjectOfType<DisplayCountdown>();
 
         connection = FindObjectOfType<Connection>();
 
         if(connection.socket.sid == connection.player1ID)
+        {
+            namePlayer2.text = connection.player2Name;
             ShowMyTurnText();
-        else ShowNotMyTurnText();
-
-        Connection.TurnManager = this;
-
-        StartCoroutine(WaitOpponentName());
+        }
+        else
+        {
+            namePlayer1.text = connection.player1Name;
+            ShowNotMyTurnText();
+        }
     }
 
     /// <summary>
@@ -66,22 +70,6 @@ public class TurnManager : MonoBehaviour
         yourTurnText.SetActive(false);
         boardCover.SetActive(false);
         backgroundText.SetActive(false);
-    }
-
-    /// <summary>
-    /// Waits for name verification
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator WaitOpponentName()
-    {
-        while(PlayerPrefs.GetString("opponent username") == "")
-        {
-            yield return new WaitForSeconds(.3f);
-        }
-        if(connection.socket.sid == connection.player1ID)
-            namePlayer2.text = PlayerPrefs.GetString("opponent username");
-        else
-            namePlayer1.text = PlayerPrefs.GetString("opponent username");
-        yield return null;
+        displayCountdown.StopCountdown();
     }
 }

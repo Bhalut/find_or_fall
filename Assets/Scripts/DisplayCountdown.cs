@@ -25,7 +25,8 @@ public class DisplayCountdown : MonoBehaviour
 
     public void StopCountdown()
     {
-        LeanTween.cancel(anim.id);
+        if (anim != null)
+            LeanTween.cancel(anim.id);
         countdown.text = "";
     }
 }

@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 
 #pragma warning disable 618
 #pragma warning disable 649

@@ -26,8 +26,11 @@ public class OpponentDisconnected : MonoBehaviour
     /// </summary>
     public void ShowScreenOpponentDisconnected()
     {
-        if (!endGame.IsEndGame())
+        if(!endGame.IsEndGame())
+        {
             screenOpponentDisconnected.SetActive(true);
+            FindObjectOfType<DisplayCountdown>().StopCountdown();
+        }
     }
 
     /// <summary>

@@ -8,23 +8,20 @@ using SocketIO;
 public class Connection : MonoBehaviour
 {
     public static int Button1;
-
     public static int Button2;
+    public string player1ID;
+    public string player1Name;
+    public string player2Name;
 
     public static ButtonManager Buttons;
-
     public static TurnManager TurnManager;
-
     public static OpponentDisconnected OpponentDisconnected;
-
-    public string player1ID;
 
     public SocketIOComponent socket;
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        PlayerPrefs.SetString("opponent username", "");
 
         socket.On("open", OnOpen);
         socket.On("error", OnError);
@@ -32,7 +29,6 @@ public class Connection : MonoBehaviour
         socket.On("opponent disconnected", OnOpponentDisconnected);
         socket.On("start game", OnStartGame);
         socket.On("my turn", OnMyTurn);
-        socket.On("opponent username", OnOpponentUsername);
     }
 
     /// <summary>
@@ -46,7 +42,6 @@ public class Connection : MonoBehaviour
         socket.Off("opponent disconnected", OnOpponentDisconnected);
         socket.Off("start game", OnStartGame);
         socket.Off("my turn", OnMyTurn);
-        socket.Off("opponent username", OnOpponentUsername);
     }
 
     /// <summary>
@@ -114,9 +109,11 @@ public class Connection : MonoBehaviour
 
         player1ID = e.data.GetField("player1Id").str;
 
-        SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
+        player1Name = e.data.GetField("player1Name").str;
 
-        EmitUsername();
+        player2Name = e.data.GetField("player2Name").str;
+
+        SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
     }
 
     /// <summary>
@@ -133,25 +130,5 @@ public class Connection : MonoBehaviour
         Buttons.DisableButton(button);
         Buttons.ButtonPressed(button);
         Buttons.CheckConditionToWin(button, false);
-    }
-
-    /// <summary>
-    /// Displays the opponent's name
-    /// </summary>
-    /// <param name="e"></param>
-    private void OnOpponentUsername(SocketIOEvent e)
-    {
-#if UNITY_EDITOR
-        Debug.Log("Opponent username: " + e.data.GetField("username"));
-#endif
-        PlayerPrefs.SetString("opponent username", e.data.GetField("username").str);
-    }
-
-    /// <summary>
-    /// Emits the name of players
-    /// </summary>
-    private void EmitUsername()
-    {
-        socket.Emit("emit username", JSONObject.CreateStringObject(PlayerPrefs.GetString("username")));
     }
 }
